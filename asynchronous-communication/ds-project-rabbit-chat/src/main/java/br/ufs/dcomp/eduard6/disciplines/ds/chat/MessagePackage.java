@@ -7,18 +7,13 @@ public class MessagePackage implements Serializable {
     private String to;
     private String message;
 
+    public MessagePackage() {
+    }
+
     public MessagePackage(String from, String to, String message) {
         this.from = from;
         this.to = to;
         this.message = message;
-    }
-
-    public boolean isFromServer(){
-        return "SERVER".equalsIgnoreCase(this.from);
-    }
-
-    public boolean isToServer() {
-        return "SERVER".equalsIgnoreCase(this.to);
     }
 
     public String getFrom() {

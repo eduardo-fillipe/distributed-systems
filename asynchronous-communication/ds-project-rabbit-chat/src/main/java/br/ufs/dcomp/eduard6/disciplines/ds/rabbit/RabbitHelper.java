@@ -11,6 +11,7 @@ import com.rabbitmq.client.DeliverCallback;
 import java.io.Closeable;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.TimeoutException;
 
@@ -72,9 +73,13 @@ public class RabbitHelper implements Closeable {
         return new AMQP.BasicProperties()
                 .builder()
                 .deliveryMode(2)
+                .timestamp(new Date())
                 .contentType("application/json")
                 .contentEncoding("UTF-8")
-                .headers(Map.of("class-name", content.getClass().getName()))
+                .headers(
+                        Map.of("class-name", content.getClass().getName(),
+                                "send-timestamp", new Date())
+                )
                 .build();
     }
 
