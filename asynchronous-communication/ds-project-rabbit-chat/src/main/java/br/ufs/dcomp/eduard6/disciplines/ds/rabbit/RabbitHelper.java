@@ -48,6 +48,10 @@ public class RabbitHelper implements Closeable {
         channel.exchangeDeclare(exchangeName, BuiltinExchangeType.FANOUT, true);
     }
 
+    public void bindQueueToFunout(String queueName, String funoutName) throws IOException {
+        channel.queueBind(queueName, funoutName, "");
+    }
+
     public <T extends Serializable> void enqueueMessage(String queueName, T content) throws IOException {
         if (!isConnected)
             throw new IllegalStateException();
